@@ -1,5 +1,9 @@
 #include "restclient.h"
 
+/*!
+ * \brief RestClient::RestClient
+ */
+
 RestClient::RestClient() :
     m_response("")
 {
@@ -7,6 +11,11 @@ RestClient::RestClient() :
     connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(serviceRequestFinished(QNetworkReply*)));
     connect(networkManager, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(getSslError(QNetworkReply*,QList<QSslError>)));
 }
+
+/*!
+ * \brief RestClient::post
+ * \param url
+ */
 
 void RestClient::post(QString url)
 {
@@ -30,6 +39,10 @@ void RestClient::post(QString url)
     networkManager->post(request, postData);
 }
 
+/*!
+ * \brief RestClient::reConnect
+ */
+
 void RestClient::reConnect()
 {
     networkManager->deleteLater();
@@ -39,10 +52,20 @@ void RestClient::reConnect()
     connect(networkManager, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(getSslError(QNetworkReply*,QList<QSslError>)));
 }
 
+/*!
+ * \brief RestClient::response
+ * \return
+ */
+
 QString RestClient::response() const
 {
     return m_response;
 }
+
+/*!
+ * \brief RestClient::serviceRequestFinished
+ * \param replay
+ */
 
 void RestClient::serviceRequestFinished(QNetworkReply *replay)
 {
@@ -59,6 +82,12 @@ void RestClient::serviceRequestFinished(QNetworkReply *replay)
     }
 }
 
+/*!
+ * \brief RestClient::getSslError
+ * \param replay
+ * \param errorList
+ */
+
 void RestClient::getSslError(QNetworkReply *replay, QList<QSslError> errorList)
 {
     appendResponse("SSL error");
@@ -66,6 +95,11 @@ void RestClient::getSslError(QNetworkReply *replay, QList<QSslError> errorList)
         appendResponse(error.errorString());
     }
 }
+
+/*!
+ * \brief RestClient::setResponse
+ * \param response
+ */
 
 void RestClient::setResponse(QString response)
 {
@@ -75,6 +109,11 @@ void RestClient::setResponse(QString response)
     m_response = response;
     emit responseChanged(m_response);
 }
+
+/*!
+ * \brief RestClient::appendResponse
+ * \param response
+ */
 
 void RestClient::appendResponse(QString response)
 {

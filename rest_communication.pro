@@ -16,6 +16,8 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
+        source/bodyvariable.cpp \
+        source/requestbodymodel.cpp \
         source/restclient.cpp
 
 RESOURCES += qml.qrc
@@ -32,6 +34,8 @@ QML_DESIGNER_IMPORT_PATH =
 #!isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
+    source/bodyvariable.h \
+    source/requestbodymodel.h \
     source/restclient.h
 
 unix {

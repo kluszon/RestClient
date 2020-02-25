@@ -1,3 +1,15 @@
+/*!
+ * \class RestClient
+ * \brief Class RestClient for manage REST
+ *
+ * Class manage REST comunication.
+ *
+ * \author Michał Kluska
+ * \version 1.0
+ * \date 2020/02/25
+ * Contact: support@pxm.pl
+ */
+
 #ifndef RESTCLIENT_H
 #define RESTCLIENT_H
 
@@ -10,13 +22,14 @@ class RestClient : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString response READ response WRITE setResponse NOTIFY responseChanged)
+    Q_PROPERTY(QString response READ response WRITE setResponse NOTIFY responseChanged) ///< Text responce to display on dialogue
+
 public:
     RestClient();
-    Q_INVOKABLE void post(QString url);
-    Q_INVOKABLE void reConnect();
+    Q_INVOKABLE void post(QString url);     ///< POST request
+    Q_INVOKABLE void reConnect();           ///< Reconnect
 
-    QString response() const;
+    QString response() const;               ///< Request response
 
 public slots:
     void serviceRequestFinished(QNetworkReply *replay);
@@ -29,9 +42,9 @@ signals:
     void responseChanged(QString response);
 
 private:
-    QNetworkAccessManager *networkManager;
-    QUrl serviceUrl;
-    QString m_response;
+    QNetworkAccessManager *networkManager;  ///< Pointer to network manager
+    QUrl serviceUrl;                        ///< Service URL
+    QString m_response;                     ///< Response
 };
 
 #endif // RESTCLIENT_H

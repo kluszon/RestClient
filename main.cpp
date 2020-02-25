@@ -4,6 +4,7 @@
 #include <QtQml>
 
 #include "source/restclient.h"
+#include "source/requestbodymodel.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,9 +16,11 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    RestClient *restClient = new RestClient();;
+    RestClient *restClient = new RestClient();
+    RequestBodyModel *requestBodyModel = new RequestBodyModel();
 
     engine.rootContext()->setContextProperty("restClient", restClient);
+    engine.rootContext()->setContextProperty("requestBodyModel", requestBodyModel);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 

@@ -54,34 +54,92 @@ Rectangle{
             border.color: "grey"
             Component{
                 id: listDelegate
-                Row{
-                    id: row
+                Rectangle{
                     width: lvBodyList.width
                     height: 50
-                    spacing: 2
-                    TextField
-                    {
-                        width: lvBodyList.width/2 - row.spacing/2
-                        height: 50
-                        text: ""
-                        placeholderText: "key"
-                    }
-                    TextField
-                    {
-                        width: lvBodyList.width/2 - row.spacing/2
-                        height: 50
-                        text: ""
-                        placeholderText: "value"
+                    color: "#e6dbdb"
+                    border.color: lvBodyList.currentIndex == index ? "blue" : "grey"
+                    border.width: 2
+                    Row{
+                        id: row
+                        anchors.fill: parent
+                        spacing: 2
+                        TextField
+                        {
+                            id: tfKey
+                            width: lvBodyList.width/2 - row.spacing/2
+                            height: 50
+                            text: key
+                            placeholderText: "key"
+                            background: Rectangle {
+                                implicitWidth: tfKey.width
+                                implicitHeight: tfKey.height
+                                color: "transparent"
+                                border.width: 0
+                            }
+                            onPressed: {
+                                lvBodyList.currentIndex = index
+                            }
+                        }
+                        TextField
+                        {
+                            width: lvBodyList.width/2 - row.spacing/2
+                            height: 50
+                            text: value
+                            placeholderText: "value"
+                            background: Rectangle {
+                                implicitWidth: tfKey.width
+                                implicitHeight: tfKey.height
+                                color: "transparent"
+                                border.width: 0
+                            }
+                            onPressed: {
+                                lvBodyList.currentIndex = index
+                                console.log(index)
+                            }
+                        }
                     }
                 }
             }
             ListView{
                 id: lvBodyList
                 anchors.fill: parent
-                model: 1
+                model: requestBodyModel
                 clip: true
                 delegate: listDelegate
-            }
+                header:
+                    Rectangle{
+                        width: lvBodyList.width
+                        height: 50
+                        color: "#736d6d"
+                        Row{
+                            id: row
+                            anchors.fill: parent
+                            spacing: 2
+                            Label
+                            {
+                                id: tfKey
+                                width: lvBodyList.width/2 - row.spacing/2
+                                height: 50
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment:  Text.AlignVCenter
+                                text: "Key"
+                                color: "white"
+                                font.pointSize: 15
+                            }
+                            Label
+                            {
+                                width: lvBodyList.width/2 - row.spacing/2
+                                height: 50
+                                horizontalAlignment: Text.AlignHCenter
+                                verticalAlignment:  Text.AlignVCenter
+                                text: "Value"
+                                color: "white"
+                                font.pointSize: 15
+                            }
+                        }
+                    }
+                }
         }
         Item{
             id: gridListButtons
@@ -98,7 +156,7 @@ Rectangle{
                 height: 50
                 width: 120
                 text: "Add Row"
-                onReleased: console.debug("add")
+                onReleased: requestBodyModel.addRow("1","2")
             }
             Button{
                 id: btnRemove
@@ -107,7 +165,9 @@ Rectangle{
                 height: 50
                 width: 120
                 text: "Remove Row"
-                onReleased: console.debug("remove")
+                enabled: lvBodyList.count > 0 ? true : false
+                onReleased: requestBodyModel.removeRow(lvBodyList.currentIndex)
+
             }
         }
         Flickable{
