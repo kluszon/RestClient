@@ -36,6 +36,7 @@ public:
     Q_ENUM(Roles)
 
     explicit RequestBodyModel(QObject *parent = nullptr);
+    static RequestBodyModel *getInstance();
 
     // Basic functionality:
     int rowCount(const QModelIndex &parent = QModelIndex()) const override;
@@ -51,6 +52,7 @@ public:
 
 private:
     QList<BodyVariable *> m_requestBody;        ///< List of body variable pointer
+    static RequestBodyModel *m_instance;
 };
 
 #endif // REQUESTBODYMODEL_H

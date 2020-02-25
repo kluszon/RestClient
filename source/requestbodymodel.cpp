@@ -1,6 +1,8 @@
 #include "requestbodymodel.h"
 #include <QDebug>
 
+RequestBodyModel *RequestBodyModel::m_instance = nullptr;
+
 /*!
  * \brief RequestBodyModel::RequestBodyModel
  * \param parent
@@ -9,6 +11,19 @@
 RequestBodyModel::RequestBodyModel(QObject *parent)
     : QAbstractListModel(parent)
 {
+}
+
+/*!
+ * \brief RequestBodyModel::getInstance
+ * \return
+ */
+
+RequestBodyModel *RequestBodyModel::getInstance()
+{
+    if(m_instance == nullptr){
+        m_instance = new RequestBodyModel();
+    }
+    return m_instance;
 }
 
 /*!

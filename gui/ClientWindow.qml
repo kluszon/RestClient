@@ -80,9 +80,13 @@ Rectangle{
                             onPressed: {
                                 lvBodyList.currentIndex = index
                             }
+                            onEditingFinished: {
+                                requestBodyModel.setData(requestBodyModel.index(index, 0), tfKey.text, 0)
+                            }
                         }
                         TextField
                         {
+                            id: tfValue
                             width: lvBodyList.width/2 - row.spacing/2
                             height: 50
                             text: value
@@ -96,6 +100,9 @@ Rectangle{
                             onPressed: {
                                 lvBodyList.currentIndex = index
                                 console.log(index)
+                            }
+                            onEditingFinished: {
+                                requestBodyModel.setData(requestBodyModel.index(index, 0), tfValue.text, 1)
                             }
                         }
                     }
@@ -156,7 +163,7 @@ Rectangle{
                 height: 50
                 width: 120
                 text: "Add Row"
-                onReleased: requestBodyModel.addRow("1","2")
+                onReleased: requestBodyModel.addRow("","")
             }
             Button{
                 id: btnRemove

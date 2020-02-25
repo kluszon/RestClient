@@ -17,7 +17,7 @@ int main(int argc, char *argv[])
     QQmlApplicationEngine engine;
 
     RestClient *restClient = new RestClient();
-    RequestBodyModel *requestBodyModel = new RequestBodyModel();
+    RequestBodyModel *requestBodyModel = RequestBodyModel::getInstance();
 
     engine.rootContext()->setContextProperty("restClient", restClient);
     engine.rootContext()->setContextProperty("requestBodyModel", requestBodyModel);

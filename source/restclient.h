@@ -18,6 +18,8 @@
 #include <QUrlQuery>
 #include <QString>
 
+#include "requestbodymodel.h"
+
 class RestClient : public QObject
 {
     Q_OBJECT
@@ -45,6 +47,7 @@ private:
     QNetworkAccessManager *networkManager;  ///< Pointer to network manager
     QUrl serviceUrl;                        ///< Service URL
     QString m_response;                     ///< Response
+    RequestBodyModel *m_requestModel;       ///< Request model
 };
 
 #endif // RESTCLIENT_H

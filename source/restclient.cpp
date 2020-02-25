@@ -8,6 +8,8 @@ RestClient::RestClient() :
     m_response("")
 {
     networkManager = new QNetworkAccessManager();
+    m_requestModel = RequestBodyModel::getInstance();
+
     connect(networkManager, SIGNAL(finished(QNetworkReply*)), this, SLOT(serviceRequestFinished(QNetworkReply*)));
     connect(networkManager, SIGNAL(sslErrors(QNetworkReply*,QList<QSslError>)), this, SLOT(getSslError(QNetworkReply*,QList<QSslError>)));
 }
@@ -19,8 +21,7 @@ RestClient::RestClient() :
 
 void RestClient::post(QString url)
 {
-    QMap<QString,QString> keyAndValue;
-    keyAndValue.insert("", "");
+    setResponse("");
 
     serviceUrl = QUrl(url);
 
@@ -30,10 +31,10 @@ void RestClient::post(QString url)
 
     QByteArray postData;
 
-    for(auto i = 0; i < keyAndValue.size(); i++){
-        qDebug() << keyAndValue.keys()[i];
-        qDebug() << keyAndValue.values()[i];
-        postData.append(keyAndValue.keys()[i] + "=" + keyAndValue.values()[i]);
+    for(auto i = 0; i < m_requestModel->rowCount(); i++){
+        QString key = m_requestModel->data(m_requestModel->index(i,0), RequestBodyModel::BODY_KEY).toString();
+        QString value = m_requestModel->data(m_requestModel->index(i,0), RequestBodyModel::BODY_VALUE).toString();
+        postData.append(key + "=" + value);
     }
 
     networkManager->post(request, postData);
