@@ -123,11 +123,13 @@ Rectangle{
                 model: requestBodyModel
                 clip: true
                 delegate: listDelegate
+                headerPositioning: ListView.OverlayHeader
                 header:
                     Rectangle{
                         width: lvBodyList.width
                         height: 50
                         color: "#736d6d"
+                        z: 2
                         Row{
                             id: row
                             anchors.fill: parent
@@ -183,7 +185,6 @@ Rectangle{
                 text: "Remove Row"
                 enabled: lvBodyList.count > 0 ? true : false
                 onReleased: requestBodyModel.removeRow(lvBodyList.currentIndex)
-
             }
         }
         Flickable{
@@ -191,25 +192,24 @@ Rectangle{
             anchors.topMargin: 20
             anchors.left: parent.left
             anchors.right: parent.right
-            contentWidth: control.width;
-            contentHeight: control.contentHeight
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 20
             ScrollBar.vertical: ScrollBar { }
-            TextArea{
-                id: control
-                anchors.top: parent.top
-                anchors.left: parent.left
-                anchors.right: parent.right
-                height: window.height/2
-                width: window.width - rctBody.anchors.margins * 2
-                text: restClient.response
+            TextArea.flickable:
+                TextArea{
+                    id: control
+                    anchors.top: parent.top
+                    anchors.left: parent.left
+                    anchors.right: parent.right
+                    text: restClient.response
 
-                background: Rectangle {
-                        implicitWidth: rctBody.width
-                        implicitHeight: rctBody.height/2
-                        color: "white"
-                        border.color: "grey"
-                    }
-            }
+                    background: Rectangle {
+                            implicitWidth: rctBody.width
+                            implicitHeight: control.height
+                            color: "white"
+                            border.color: "grey"
+                        }
+                }
         }
     }
 }
