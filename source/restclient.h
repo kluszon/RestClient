@@ -24,9 +24,9 @@ class RestClient : public QObject
 
 public:
     static RestClient *getInstance();
-    void get(QUrl url, QString getData);      ///< GET request
-    void post(QUrl url, QByteArray postData);     ///< POST request
-    void reConnect();                                   ///< Reconnect
+    void get(QUrl url, QString getData);        ///< GET request
+    void post(QUrl url, QByteArray postData);   ///< POST request
+    void reConnect();                           ///< Reconnect
 
 public slots:
     void requestFinished(QNetworkReply *replay);

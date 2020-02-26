@@ -16,6 +16,7 @@
 
 #include <QObject>
 #include <QUrl>
+#include <QJsonDocument>
 
 #include "restclient.h"
 #include "requestbodymodel.h"

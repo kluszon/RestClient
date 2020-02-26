@@ -104,9 +104,8 @@ void GuiEngine::setResponse(QString response)
 
 void GuiEngine::parseResponse(QString newResponse)
 {
-    newResponse.replace(",",",\n");
-    newResponse.replace("{", "\n{\n");
-    newResponse.replace("}", "\n}");
+    QJsonDocument document = QJsonDocument::fromJson(newResponse.toUtf8());
+    QString formattedJsonString = document.toJson(QJsonDocument::Indented);
 
-    setResponse(newResponse);
+    setResponse(formattedJsonString);
 }
