@@ -7,7 +7,7 @@
  * \author Michał Kluska
  * \version 1.0
  * \date 2020/02/25
- * Contact: support@pxm.pl
+ * Contact: kluska.mk@gmail.com
  */
 
 #ifndef BODYVARIABLE_H

@@ -11,6 +11,7 @@ RequestBodyModel *RequestBodyModel::m_instance = nullptr;
 RequestBodyModel::RequestBodyModel(QObject *parent)
     : QAbstractListModel(parent)
 {
+    addRow("foo1", "bar1");
 }
 
 /*!

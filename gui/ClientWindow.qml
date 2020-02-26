@@ -30,7 +30,7 @@ Rectangle{
                 id: tfUrl
                 width: 510
                 height: 50
-                text: ""
+                text: "https://postman-echo.com/get"
                 anchors.top: parent.top
                 anchors.left: cbRequestType.right
             }
@@ -41,9 +41,9 @@ Rectangle{
                 onReleased: {
                     switch(cbRequestType.currentIndex)
                     {
-                        case 0: restClient.get(tfUrl.text)
+                        case 0: guiEngine.getRequest(tfUrl.text)
                         break;
-                        case 1: restClient.post(tfUrl.text)
+                        case 1: guiEngine.postRequest(tfUrl.text)
                         break;
                         default:
                     }
@@ -108,7 +108,6 @@ Rectangle{
                             }
                             onPressed: {
                                 lvBodyList.currentIndex = index
-                                console.log(index)
                             }
                             onEditingFinished: {
                                 requestBodyModel.setData(requestBodyModel.index(index, 0), tfValue.text, 1)
@@ -201,7 +200,7 @@ Rectangle{
                     anchors.top: parent.top
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    text: restClient.response
+                    text: guiEngine.response
 
                     background: Rectangle {
                             implicitWidth: rctBody.width

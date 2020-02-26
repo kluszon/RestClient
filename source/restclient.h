@@ -7,7 +7,7 @@
  * \author Michał Kluska
  * \version 1.0
  * \date 2020/02/25
- * Contact: support@pxm.pl
+ * Contact: kluska.mk@gmail.com
  */
 
 #ifndef RESTCLIENT_H
@@ -18,37 +18,28 @@
 #include <QUrlQuery>
 #include <QString>
 
-#include "requestbodymodel.h"
-
 class RestClient : public QObject
 {
     Q_OBJECT
 
-    Q_PROPERTY(QString response READ response WRITE setResponse NOTIFY responseChanged) ///< Text responce to display on dialogue
-
 public:
-    RestClient();
-    Q_INVOKABLE void get(QString url);      ///< GET request
-    Q_INVOKABLE void post(QString url);     ///< POST request
-    Q_INVOKABLE void reConnect();           ///< Reconnect
-
-    QString response() const;               ///< Request response
+    static RestClient *getInstance();
+    void get(QUrl url, QString getData);      ///< GET request
+    void post(QUrl url, QByteArray postData);     ///< POST request
+    void reConnect();                                   ///< Reconnect
 
 public slots:
-    void serviceRequestFinished(QNetworkReply *replay);
+    void requestFinished(QNetworkReply *replay);
     void getSslError(QNetworkReply *replay, QList<QSslError> errorList);
 
-    void setResponse(QString response);
-    void appendResponse(QString response);
-
 signals:
-    void responseChanged(QString response);
+    void response(QString);
 
 private:
+    RestClient();
+    static RestClient *m_instance;          ///< Class instance
     QNetworkAccessManager *networkManager;  ///< Pointer to network manager
     QUrl serviceUrl;                        ///< Service URL
-    QString m_response;                     ///< Response
-    RequestBodyModel *m_requestModel;       ///< Request model
 };
 
 #endif // RESTCLIENT_H

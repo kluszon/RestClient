@@ -3,7 +3,7 @@
 #include <QQmlContext>
 #include <QtQml>
 
-#include "source/restclient.h"
+#include "source/guiengine.h"
 #include "source/requestbodymodel.h"
 
 int main(int argc, char *argv[])
@@ -16,10 +16,10 @@ int main(int argc, char *argv[])
 
     QQmlApplicationEngine engine;
 
-    RestClient *restClient = new RestClient();
+    GuiEngine *guiEngine = GuiEngine::getInstance();
     RequestBodyModel *requestBodyModel = RequestBodyModel::getInstance();
 
-    engine.rootContext()->setContextProperty("restClient", restClient);
+    engine.rootContext()->setContextProperty("guiEngine", guiEngine);
     engine.rootContext()->setContextProperty("requestBodyModel", requestBodyModel);
 
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));

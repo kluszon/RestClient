@@ -17,6 +17,7 @@ DEFINES += QT_DEPRECATED_WARNINGS
 SOURCES += \
         main.cpp \
         source/bodyvariable.cpp \
+        source/guiengine.cpp \
         source/requestbodymodel.cpp \
         source/restclient.cpp
 
@@ -35,6 +36,7 @@ QML_DESIGNER_IMPORT_PATH =
 
 HEADERS += \
     source/bodyvariable.h \
+    source/guiengine.h \
     source/requestbodymodel.h \
     source/restclient.h
 

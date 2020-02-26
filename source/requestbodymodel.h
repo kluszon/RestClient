@@ -7,7 +7,7 @@
  * \author Michał Kluska
  * \version 1.0
  * \date 2020/02/25
- * Contact: support@pxm.pl
+ * Contact: kluska.mk@gmail.com
  */
 
 
@@ -35,7 +35,6 @@ public:
     };
     Q_ENUM(Roles)
 
-    explicit RequestBodyModel(QObject *parent = nullptr);
     static RequestBodyModel *getInstance();
 
     // Basic functionality:
@@ -51,8 +50,9 @@ public:
     QHash<int, QByteArray> roleNames() const;                               ///< Method return role name
 
 private:
-    QList<BodyVariable *> m_requestBody;        ///< List of body variable pointer
+    explicit RequestBodyModel(QObject *parent = nullptr);
     static RequestBodyModel *m_instance;
+    QList<BodyVariable *> m_requestBody;        ///< List of body variable pointer
 };
 
 #endif // REQUESTBODYMODEL_H
