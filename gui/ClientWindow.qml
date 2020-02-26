@@ -38,7 +38,16 @@ Rectangle{
                 height: 50
                 width: 120
                 text: "Send"
-                onReleased: restClient.post(tfUrl.text)
+                onReleased: {
+                    switch(cbRequestType.currentIndex)
+                    {
+                        case 0: restClient.get(tfUrl.text)
+                        break;
+                        case 1: restClient.post(tfUrl.text)
+                        break;
+                        default:
+                    }
+                }
                 anchors.top: parent.top
                 anchors.left: tfUrl.right
                 anchors.leftMargin: 10

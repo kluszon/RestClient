@@ -28,6 +28,7 @@ class RestClient : public QObject
 
 public:
     RestClient();
+    Q_INVOKABLE void get(QString url);      ///< GET request
     Q_INVOKABLE void post(QString url);     ///< POST request
     Q_INVOKABLE void reConnect();           ///< Reconnect
 

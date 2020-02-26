@@ -15,6 +15,34 @@ RestClient::RestClient() :
 }
 
 /*!
+ * \brief RestClient::get
+ * \param url
+ */
+
+void RestClient::get(QString url)
+{
+    setResponse("");
+
+    QString getData;
+
+    getData.append("?");
+
+    for(auto i = 0; i < m_requestModel->rowCount(); i++){
+        QString key = m_requestModel->data(m_requestModel->index(i,0), RequestBodyModel::BODY_KEY).toString();
+        QString value = m_requestModel->data(m_requestModel->index(i,0), RequestBodyModel::BODY_VALUE).toString();
+        getData.append(key + "=" + value + "&");
+    }
+
+    url = url + getData;
+
+    serviceUrl = QUrl(url);
+
+    QNetworkRequest request(serviceUrl);
+
+    networkManager->get(request);
+}
+
+/*!
  * \brief RestClient::post
  * \param url
  */
