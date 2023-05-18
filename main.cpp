@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 
     QGuiApplication app(argc, argv);
     app.setApplicationName("Rest client");
-    app.setApplicationVersion("1.0.0");
+    app.setApplicationVersion("1.0");
 
     QQmlApplicationEngine engine;
 

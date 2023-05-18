@@ -15,7 +15,7 @@ ApplicationWindow{
     minimumHeight: height
     minimumWidth: width
 
-    title: qsTr("Rest client")
+    title: qsTr("Rest client") + " " + Qt.application.version
     ClientWindow{
         anchors.fill: parent
     }
